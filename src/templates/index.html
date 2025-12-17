@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbots chat exp 1</title>
+    <style>
+        #chat { border: 1px solid #333; height: 400px; overflow-y: auto; padding: 15px; background: #f9f9f9; }
+        .message { margin-bottom: 10px; font-family: sans-serif; }
+        .kill { background-color: #ff4444; color: rgb(0, 0, 0); padding: 10px; cursor: pointer; border: none; }
+        .execute { background-color: #44ff7c; color: rgb(0, 0, 0); padding: 10px; cursor: pointer; border: none; }
+    </style>
+</head>
+<body>
+
+    <div id="chat-window"></div> 
+    <br>
+
+    <button class="execute" onclick="startExperiment()">Execute</button>
+    <button class="kill" onclick="stopExperiment()">Kill</button>
+
+    <script>
+        let eventSource;
+
+        function startExperiment() {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.innerHTML = "<em>Starting agents...</em><br>";
+
+
+            eventSource = new EventSource("/chat_stream");
+
+            eventSource.onmessage = function(event) {
+                const newMsg = document.createElement("div");
+                newMsg.className = "message";
+                newMsg.innerText = event.data;
+                chatWindow.appendChild(newMsg);
+                chatWindow.scrollTop = chatWindow.scrollHeight; 
+            };
+
+            eventSource.onerror = function() {
+                console.log("Connection closed or ended.");
+                eventSource.close();
+            };
+        }
+
+        function stopExperiment() {
+            if (eventSource) {
+                eventSource.close(); 
+                document.getElementById('chat-window').innerHTML += "<br><strong>[SYSTEM]: Kill switch activated.</strong>";
+                console.log("Kill switch triggered.");
+            }
+        }
+    </script>
+</body>
+</html>
