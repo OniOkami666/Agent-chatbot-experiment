@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <div id="chat-window"></div> 
+    <div id="chat"></div> 
     <br>
 
     <button class="execute" onclick="startExperiment()">Execute</button>
@@ -22,7 +22,7 @@
         let eventSource;
 
         function startExperiment() {
-            const chatWindow = document.getElementById('chat-window');
+            const chatWindow = document.getElementById('chat');
             chatWindow.innerHTML = "<em>Starting agents...</em><br>";
 
 
@@ -43,12 +43,11 @@
         }
 
         function stopExperiment() {
-            if (eventSource) {
-                eventSource.close(); 
-                document.getElementById('chat-window').innerHTML += "<br><strong>[SYSTEM]: Kill switch activated.</strong>";
-                console.log("Kill switch triggered.");
-            }
-        }
+    if (eventSource) {
+        eventSource.close();
+    }
+    fetch("/kill", { method: "POST" });
+}
     </script>
 </body>
 </html>

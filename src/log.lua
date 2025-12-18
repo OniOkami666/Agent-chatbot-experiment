@@ -1,4 +1,4 @@
--- simple lua chat logger primarily to examine after running it for hours
+-- simple lua chat logger
 
 function log(source, content)
     local file = io.open("logs.txt", "a")

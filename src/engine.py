@@ -1,18 +1,12 @@
-import os
-import ollama
-from dotenv import load_dotenv
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_ext.models.ollama import OllamaChatCompletionClient
 from autogen_agentchat.teams import RoundRobinGroupChat
 
-load_dotenv()
-TOKEN = os.getenv("OLLAMA_TOKEN")
 
 ollama_client = OllamaChatCompletionClient(
     model="llama3.2",
-    base_url="http://placeholder.com/v1",
-    api_key=TOKEN,
+    base_url="http://localhost:11434",
 )
 
 def chat_init():
