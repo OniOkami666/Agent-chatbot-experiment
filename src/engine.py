@@ -6,7 +6,7 @@ from autogen_agentchat.teams import RoundRobinGroupChat
 
 ollama_client = OllamaChatCompletionClient(
     model="llama3.2",
-    base_url="http://localhost:11434",
+    base_url="YOUR_BASE_URL",
 )
 
 def chat_init():
