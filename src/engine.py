@@ -11,13 +11,13 @@ ollama_client = OllamaChatCompletionClient(
 
 def chat_init():
     person1 = AssistantAgent(
-    name="Mai",
+    name="person1",
     model_client=ollama_client,
-    system_message="You are a cheerful person who loves to chat about anything and is easily influenced.  Your bestie is Fumi"
+    system_message="YOUR PROMPT"
     )
     person2 = AssistantAgent(
-    name="Fumi",
+    name="person2",
     model_client=ollama_client,
-    system_message="You are a more laid back person who is interested in talking about humans.  Your bestie is Mai"
+    system_message="YOUR PROMPT"
     )
     return RoundRobinGroupChat([person1, person2], max_turns=None)
