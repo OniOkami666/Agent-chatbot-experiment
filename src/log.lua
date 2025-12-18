@@ -1,7 +1,7 @@
 -- simple lua chat logger
 
 function log(source, content)
-    local file = io.open("logs.txt", "a")
+    local file = io.open("logs.txt", "w")
     if file then
         local timestamp = os.date("%Y-%m-%d %H:%M:%S")
         local clean = content:gsub("/n", " ")
