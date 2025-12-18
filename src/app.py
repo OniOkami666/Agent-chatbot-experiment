@@ -38,6 +38,7 @@ def chat_stream():
 
         try:
             while not stop_event.is_set():
+                # Display the next message
                 yield loop.run_until_complete(gen.__anext__())
         except StopAsyncIteration:
             print("Chat ended naturally.")
